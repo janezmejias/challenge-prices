@@ -162,3 +162,5 @@ http://localhost:8080/swagger-ui/index.html
 
 ### Sonar Cloud
 https://sonarcloud.io/project/overview?id=janezmejias_challenge-prices
+
+![sonarcloud](docs/sonarcloud.png)
