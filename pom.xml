@@ -129,7 +129,8 @@
                                 <rule>
                                     <excludes>
                                         <exclude>com.ecommerce</exclude>
-                                        <exclude>com.ecommerce.domain.prices.mapper</exclude>
+                                        <exclude>com.ecommerce.domain.prices.exceptions</exclude>
+                                        <exclude>com.ecommerce.domain.prices.mapper*</exclude>
                                         <exclude>com.ecommerce.infrastructure.config*</exclude>
                                     </excludes>
                                     <element>PACKAGE</element>

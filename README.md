@@ -164,7 +164,7 @@ Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 
 ### OpenAPI definition
 
-http://localhost:8080/swagger-ui/index.html
+http://localhost:8080/swagger-ui/index.html#/price-controller/getPrice
 
 ![swagger](docs/swagger.png)
 

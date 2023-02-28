@@ -2,6 +2,7 @@ package com.ecommerce.domain.prices;
 
 import com.ecommerce.domain.prices.mapper.RequestMapper;
 import com.ecommerce.domain.prices.request.PriceRequest;
+import com.ecommerce.domain.prices.request.PriceRequestContext;
 import com.ecommerce.domain.prices.response.PriceResponse;
 import com.ecommerce.infrastructure.adapters.out.jpa.entity.Brand;
 import com.ecommerce.infrastructure.adapters.out.jpa.entity.Price;
@@ -33,9 +34,10 @@ class DomainPriceServiceTest {
     @InjectMocks
     private DomainPriceService domainPriceService;
 
-    private final List<Price> prices = new ArrayList<>();
-    private final PriceResponse priceResponse = new PriceResponse();
-    private final LocalDateTime appDate = LocalDateTime.now();
+    private List<Price> prices = new ArrayList<>();
+    private PriceResponse priceResponse = new PriceResponse();
+    private LocalDateTime appDate = LocalDateTime.now();
+    private PriceRequestContext priceRequestContext;
 
     @BeforeEach
     public void setup() {
@@ -66,8 +68,13 @@ class DomainPriceServiceTest {
     void testGetPrice() {
         PriceRequest priceRequest = PriceRequest.builder().appDate(appDate).brandId(1).productId(35455).build();
 
+        priceRequestContext = PriceRequestContext.builder()
+                .priceRequest(priceRequest)
+                .price(prices.get(1))
+                .build();
+
         given(priceRepository.findByBrandProductAndDate(1, 35455, appDate)).willReturn(prices);
-        given(requestMapper.of(priceRequest)).willReturn(priceResponse);
+        given(requestMapper.of(priceRequestContext)).willReturn(priceResponse);
 
         domainPriceService.getPrice(priceRequest).ifPresent(priceResponse -> {
             assertEquals(1, priceResponse.getBrandId());

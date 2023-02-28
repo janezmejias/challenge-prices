@@ -1,8 +1,10 @@
 package com.ecommerce.infrastructure.config.exceptions;
 
+import com.ecommerce.domain.prices.exceptions.BrandProductAndDateNotFound;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -66,6 +68,16 @@ public class ControllerAdviceBase extends ResponseEntityExceptionHandler {
     @ExceptionHandler({IllegalStateException.class, IllegalArgumentException.class})
     public ProblemDetail handleCatchErrors(Exception ex) {
         return buildProblemDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ProblemDetail constraintViolationException(ConstraintViolationException ex) {
+        return buildProblemDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    @ExceptionHandler({BrandProductAndDateNotFound.class})
+    public ProblemDetail brandProductAndDateNotFound(Exception ex) {
+        return buildProblemDetail(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
     @ExceptionHandler({Exception.class})

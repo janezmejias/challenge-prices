@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 @Data
 public class PriceResponse {
 
-    private BigDecimal price;
-    private Integer brandId;
     private Integer productId;
+    private Integer brandId;
+    private BigDecimal price;
     private LocalDateTime appDate;
     private BigDecimal finalPrice;
 
