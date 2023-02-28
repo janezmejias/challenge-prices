@@ -1,4 +1,12 @@
 # Precios
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=janezmejias_challenge-prices&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=janezmejias_challenge-prices)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=janezmejias_challenge-prices&metric=bugs)](https://sonarcloud.io/summary/new_code?id=janezmejias_challenge-prices)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=janezmejias_challenge-prices&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=janezmejias_challenge-prices)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=janezmejias_challenge-prices&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=janezmejias_challenge-prices)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=janezmejias_challenge-prices&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=janezmejias_challenge-prices)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=janezmejias_challenge-prices&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=janezmejias_challenge-prices)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=janezmejias_challenge-prices&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=janezmejias_challenge-prices)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=janezmejias_challenge-prices&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=janezmejias_challenge-prices)
 
 En la base de datos de comercio electrónico de la compañía disponemos de la tabla PRICES que refleja el precio final (pvp) y la tarifa que aplica a un producto de una cadena entre unas fechas determinadas. A continuación se muestra un ejemplo de la tabla con los campos relevantes:
 
