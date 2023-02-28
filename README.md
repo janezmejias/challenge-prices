@@ -30,26 +30,6 @@ En la base de datos de comercio electrónico de la compañía disponemos de la t
 | PRICE | precio final de venta. |
 | CURR | iso de la moneda. |
 
-### Se pide
-
-Construir una aplicación/servicio en SpringBoot que provea una end point rest de consulta  tal que:
-
-* Acepte como parámetros de entrada: fecha de aplicación, identificador de producto, identificador de cadena.
-Devuelva como datos de salida: identificador de producto, identificador de cadena, tarifa a aplicar, fechas de aplicación y precio final a aplicar.
-
-* Se debe utilizar una base de datos en memoria (tipo h2) e inicializar con los datos del ejemplo, (se pueden cambiar el nombre de los campos y añadir otros nuevos si se quiere, elegir el tipo de dato que se considere adecuado para los mismos).
-
-* Desarrollar unos test al endpoint rest que  validen las siguientes peticiones al servicio con los datos del ejemplo:
-
-| Test | Detalle |
-|------|---------|
-| 1 | Petición a las 10:00 del día 14 del producto 35455   para la brand 1 (ZARA) |
-| 2 | Petición a las 16:00 del día 14 del producto 35455   para la brand 1 (ZARA) |
-| 3 | Petición a las 21:00 del día 14 del producto 35455   para la brand 1 (ZARA) |
-| 4 | Petición a las 10:00 del día 15 del producto 35455   para la brand 1 (ZARA) |
-| 5 | Petición a las 21:00 del día 16 del producto 35455   para la brand 1 (ZARA) |
-
-
 ### Arquitectura (Hexagonal)
 La lógica del dominio se concreta en el core del negocio, al que llamaremos "Domain", siendo el resto partes exteriores. El acceso a la lógica del dominio desde el exterior está disponible a través de puertos y adaptadores.
 Con este enfoque, podemos intercambiar fácilmente las diferentes capas de aplicación / infraestructura.
@@ -80,18 +60,13 @@ Con este enfoque, podemos intercambiar fácilmente las diferentes capas de aplic
             └── ControllerAdviceBase.java
 ```
 
-### Diseño de base de datos
-![db](docs/db.png)
+### Requisitos
 
-```sh
-INSERT INTO BRANDS (BRAND_ID, NAME) VALUES (1, 'ZARA');
-INSERT INTO PRICES (PRICE_ID, BRAND_ID, START_DATE, END_DATE, PRICE_LIST, PRODUCT_ID, PRIORITY, PRICE, CURR) VALUES (1, 1, TIMESTAMP '2020-06-14 00:00:00', TIMESTAMP '2020-12-31 23:59:59', 1, 35455, 0, 35.50, 'EUR');
-INSERT INTO PRICES (PRICE_ID, BRAND_ID, START_DATE, END_DATE, PRICE_LIST, PRODUCT_ID, PRIORITY, PRICE, CURR) VALUES (2, 1, TIMESTAMP '2020-06-14 15:00:00', TIMESTAMP '2020-06-14 18:30:00', 2, 35455, 1, 25.45, 'EUR');
-INSERT INTO PRICES (PRICE_ID, BRAND_ID, START_DATE, END_DATE, PRICE_LIST, PRODUCT_ID, PRIORITY, PRICE, CURR) VALUES (3, 1, TIMESTAMP '2020-06-15 00:00:00', TIMESTAMP '2020-06-15 11:00:00', 3, 35455, 1, 30.50, 'EUR');
-INSERT INTO PRICES (PRICE_ID, BRAND_ID, START_DATE, END_DATE, PRICE_LIST, PRODUCT_ID, PRIORITY, PRICE, CURR) VALUES (4, 1, TIMESTAMP '2020-06-15 16:00:00', TIMESTAMP '2020-12-31 23:59:59', 4, 35455, 1, 38.95, 'EUR');
-```
+- Java 17
+- Maven ^3
 
 ### Propiedades (application.yaml)
+Se utiliza una base de datos en memoria (tipo h2 / se pueden cambiar el nombre de los campos y añadir otros nuevos si se quiere, elegir el tipo de dato que se considere adecuado para los mismos).
 ```sh
 spring:
   datasource:
@@ -105,10 +80,17 @@ spring:
       ddl-auto: create
 ```
 
-### Requisitos
+### Diseño de base de datos
+![db](docs/db.png)
 
-- Java 17
-- Maven ^3
+Se inicia con los datos del ejemplo:
+```sh
+INSERT INTO BRANDS (BRAND_ID, NAME) VALUES (1, 'ZARA');
+INSERT INTO PRICES (PRICE_ID, BRAND_ID, START_DATE, END_DATE, PRICE_LIST, PRODUCT_ID, PRIORITY, PRICE, CURR) VALUES (1, 1, TIMESTAMP '2020-06-14 00:00:00', TIMESTAMP '2020-12-31 23:59:59', 1, 35455, 0, 35.50, 'EUR');
+INSERT INTO PRICES (PRICE_ID, BRAND_ID, START_DATE, END_DATE, PRICE_LIST, PRODUCT_ID, PRIORITY, PRICE, CURR) VALUES (2, 1, TIMESTAMP '2020-06-14 15:00:00', TIMESTAMP '2020-06-14 18:30:00', 2, 35455, 1, 25.45, 'EUR');
+INSERT INTO PRICES (PRICE_ID, BRAND_ID, START_DATE, END_DATE, PRICE_LIST, PRODUCT_ID, PRIORITY, PRICE, CURR) VALUES (3, 1, TIMESTAMP '2020-06-15 00:00:00', TIMESTAMP '2020-06-15 11:00:00', 3, 35455, 1, 30.50, 'EUR');
+INSERT INTO PRICES (PRICE_ID, BRAND_ID, START_DATE, END_DATE, PRICE_LIST, PRODUCT_ID, PRIORITY, PRICE, CURR) VALUES (4, 1, TIMESTAMP '2020-06-15 16:00:00', TIMESTAMP '2020-12-31 23:59:59', 4, 35455, 1, 38.95, 'EUR');
+```
 
 ### Iniciar
 
@@ -139,7 +121,20 @@ Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
 
 ### Test
 
+```sh
 mvn test
+```
+
+S validan las siguientes peticiones al servicio con los datos del ejemplo:
+
+| Test | Detalle |
+|------|---------|
+| 1 | Petición a las 10:00 del día 14 del producto 35455   para la brand 1 (ZARA) |
+| 2 | Petición a las 16:00 del día 14 del producto 35455   para la brand 1 (ZARA) |
+| 3 | Petición a las 21:00 del día 14 del producto 35455   para la brand 1 (ZARA) |
+| 4 | Petición a las 10:00 del día 15 del producto 35455   para la brand 1 (ZARA) |
+| 5 | Petición a las 21:00 del día 16 del producto 35455   para la brand 1 (ZARA) |
+
 
 ```sh
 Results :
@@ -157,6 +152,9 @@ Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 ### OpenAPI definition
 
 http://localhost:8080/swagger-ui/index.html#/price-controller/getPrice
+
+Acepte como parámetros de entrada: fecha de aplicación, identificador de producto, identificador de cadena.
+Devuelva como datos de salida: identificador de producto, identificador de cadena, tarifa a aplicar, fechas de aplicación y precio final a aplicar.
 
 ![swagger](docs/swagger.png)
 

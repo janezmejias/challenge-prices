@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,8 +20,15 @@ public class DomainPriceService implements PriceService {
     private final PriceRepository priceRepository;
     private final RequestMapper requestMapper;
 
+    /**
+     * El metodo getPrice tiene como responsabilidad filtrar mediante los paramtros
+     * brandId / productId / appDate la informacion localizada en la db de memoria
+     *
+     * @param priceRequest Contiene informacion base para realizar la consulta
+     * @return Optional<PriceResponse>
+     */
     @Override
-    public Optional<PriceResponse> getPrice(PriceRequest priceRequest) {
+    public PriceResponse getPrice(PriceRequest priceRequest) {
         List<Price> prices = priceRepository.findByBrandProductAndDate(
                 priceRequest.getBrandId(),
                 priceRequest.getProductId(),
@@ -30,13 +36,10 @@ public class DomainPriceService implements PriceService {
 
         if (!prices.isEmpty()) {
             Price price = prices.stream().max(Comparator.comparing(Price::getPriority)).get();
-
-            PriceResponse priceResponse = requestMapper.of(PriceRequestContext.builder()
+            return requestMapper.of(PriceRequestContext.builder()
                     .priceRequest(priceRequest)
                     .price(price)
                     .build());
-
-            return Optional.of(priceResponse);
         }
 
         throw new BrandProductAndDateNotFound();

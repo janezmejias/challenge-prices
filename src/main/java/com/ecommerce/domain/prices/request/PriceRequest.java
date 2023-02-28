@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+/**
+ * Contiene informacion base para realizar la consulta
+ */
 @Data
 @Builder
 public class PriceRequest {

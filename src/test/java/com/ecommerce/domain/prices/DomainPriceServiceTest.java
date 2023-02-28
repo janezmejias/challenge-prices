@@ -19,6 +19,7 @@ import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
@@ -76,12 +77,13 @@ class DomainPriceServiceTest {
         given(priceRepository.findByBrandProductAndDate(1, 35455, appDate)).willReturn(prices);
         given(requestMapper.of(priceRequestContext)).willReturn(priceResponse);
 
-        domainPriceService.getPrice(priceRequest).ifPresent(priceResponse -> {
-            assertEquals(1, priceResponse.getBrandId());
-            assertEquals(new BigDecimal(2).setScale(2, RoundingMode.HALF_EVEN), priceResponse.getPrice().setScale(2, RoundingMode.HALF_EVEN));
-            assertEquals(appDate, priceResponse.getAppDate());
-            assertEquals(new BigDecimal(40).setScale(2, RoundingMode.HALF_EVEN), priceResponse.getFinalPrice().setScale(2, RoundingMode.HALF_EVEN));
-            assertEquals(35455, priceResponse.getProductId());
-        });
+        PriceResponse localPriceResponse = domainPriceService.getPrice(priceRequest);
+        if (Objects.nonNull(localPriceResponse)) {
+            assertEquals(1, localPriceResponse.getBrandId());
+            assertEquals(new BigDecimal(2).setScale(2, RoundingMode.HALF_EVEN), localPriceResponse.getPrice().setScale(2, RoundingMode.HALF_EVEN));
+            assertEquals(appDate, localPriceResponse.getAppDate());
+            assertEquals(new BigDecimal(40).setScale(2, RoundingMode.HALF_EVEN), localPriceResponse.getFinalPrice().setScale(2, RoundingMode.HALF_EVEN));
+            assertEquals(35455, localPriceResponse.getProductId());
+        }
     }
 }
