@@ -1,4 +1,4 @@
-# Code Challenge
+# Precios
 
 En la base de datos de comercio electrónico de la compañía disponemos de la tabla PRICES que refleja el precio final (pvp) y la tarifa que aplica a un producto de una cadena entre unas fechas determinadas. A continuación se muestra un ejemplo de la tabla con los campos relevantes:
 
@@ -159,3 +159,6 @@ Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 http://localhost:8080/swagger-ui/index.html
 
 ![swagger](docs/swagger.png)
+
+### Sonar Cloud
+https://sonarcloud.io/project/overview?id=janezmejias_challenge-prices
