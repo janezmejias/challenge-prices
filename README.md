@@ -62,17 +62,10 @@ Con este enfoque, podemos intercambiar fácilmente las diferentes capas de aplic
 │       └── in
 │           └── rest
 │               └── PriceController.java
-├── Application.java
 ├── domain
 │   └── prices
 │       ├── DomainPriceService.java
-│       ├── mapper
-│       │   └── RequestMapper.java
-│       ├── PriceService.java
-│       ├── request
-│       │   └── PriceRequest.java
-│       └── response
-│           └── PriceResponse.java
+│       └── PriceService.java
 └── infrastructure
     ├── adapters
     │   └── out
@@ -84,8 +77,7 @@ Con este enfoque, podemos intercambiar fácilmente las diferentes capas de aplic
     │               └── PriceRepository.java
     └── config
         └── exceptions
-            ├── ControllerAdviceBase.java
-            └── ProblemDetailBase.java
+            └── ControllerAdviceBase.java
 ```
 
 ### Diseño de base de datos
